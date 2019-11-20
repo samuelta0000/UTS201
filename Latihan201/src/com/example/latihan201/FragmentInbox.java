@@ -37,7 +37,7 @@ public class FragmentInbox extends Fragment{
     String url="http://apilearning.totopeto.com/messages/inbox?id=";
     ArrayList<HashMap<String,String>> inboxList;
     TextView tinbox;
-    Button pbpesan;
+    Button pbpesan,bback;
     ListView linbox;
     String inbox_count;
     String contactin,contactn;
@@ -51,16 +51,29 @@ public class FragmentInbox extends Fragment{
         tinbox=(TextView)rootView.findViewById(R.id.tvinbox);
         linbox=(ListView)rootView.findViewById(R.id.lvinbox);
         pbpesan=(Button)rootView.findViewById(R.id.btntlspesan);
+        bback=(Button)rootView.findViewById(R.id.btnback);
         
         contactin=getArguments().getString("id");
         contactn=getArguments().getString("name");
+        
+        bback.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent=new Intent(getActivity(),MainActivity.class);
+				
+				startActivity(intent);
+				
+			}
+		});
         
         pbpesan.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Intent intent=new Intent(FragmentInbox.this.getActivity(),PesanBaru.class);
+				Intent intent=new Intent(getActivity(),PesanBaru.class);
 				intent.putExtra("name", contactn);
 				intent.putExtra("id", contactin);
 				
@@ -135,10 +148,9 @@ public class FragmentInbox extends Fragment{
                         String content = c.getString("content");
                         
                         String date=c.getString("created_at");
-                        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+                        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                         Date dated=format.parse(date);
-                        String created_at=format.format(dated);
-                        
+                        String created_at=format.format(dated).replace("T", " ");
                         
                         String from = c.getString("from");
  

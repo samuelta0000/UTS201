@@ -54,8 +54,8 @@ public class PesanBaru extends Activity implements OnItemSelectedListener {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				Intent intent=new Intent(PesanBaru.this,MainFragmentActivity.class);
-				startActivity(intent);
 				finish();
+				startActivity(intent);
 			}
 		});
 		
